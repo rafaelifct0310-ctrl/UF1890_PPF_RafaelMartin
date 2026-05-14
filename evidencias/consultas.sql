@@ -13,4 +13,11 @@ SELECT * FROM public.sale_order_line LIMIT 10;
 
 -- Ventas por clientes
 SELECT 
-    c.
+    c.nombre,
+    SUM(f.total) AS ventas_totales
+FROM dw1.fact_ventas f
+JOIN dw1.dim_cliente c
+    ON f.id_cliente = c.id_cliente
+GROUP BY c.nombre
+ORDER BY ventas_totales DESC;
+
